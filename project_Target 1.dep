@@ -1,0 +1,17 @@
+Dependencies for Project 'project', Target 'Target 1': (DO NOT MODIFY !)
+F (.\inc\stm32f4xx.h)(0x531CBDA8)()
+F (.\inc\system_stm32f4xx.h)(0x529F2BA2)()
+F (.\inc\Core\core_cm4.h)(0x512C8EE2)()
+F (.\inc\Core\core_cm4_simd.h)(0x522DAB68)()
+F (.\inc\Core\core_cmFunc.h)(0x512C8EE2)()
+F (.\inc\Core\core_cmInstr.h)(0x51BAC5E4)()
+F (.\src\system_stm32f4xx.c)(0x532F4B12)(-c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I.\inc -I.\inc\Core -I.\src-I d:\Keil_v5\ARM\RV31\INC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.7\Device\Include-DSTM32F40_41xxx -o .\system_stm32f4xx.o --omf_browse .\system_stm32f4xx.crf --depend .\system_stm32f4xx.d)
+I (.\inc\stm32f4xx.h)(0x531CBDA8)
+I (.\inc\Core\core_cm4.h)(0x512C8EE2)
+I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FE34EE)
+I (.\inc\Core\core_cmInstr.h)(0x51BAC5E4)
+I (.\inc\Core\core_cmFunc.h)(0x512C8EE2)
+I (.\inc\Core\core_cm4_simd.h)(0x522DAB68)
+I (.\inc\system_stm32f4xx.h)(0x529F2BA2)
+F (.\src\main.c)(0x5390490C)(-c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I.\inc -I.\inc\Core -I.\src-I d:\Keil_v5\ARM\RV31\INC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.7\Device\Include-DSTM32F40_41xxx -o .\main.o --omf_browse .\main.crf --depend .\main.d)
+F (.\src\startup_stm32f4xx.s)(0x4EAA6856)(--cpu Cortex-M4.fp -g --apcs=interwork -I d:\Keil_v5\ARM\RV31\INC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.7\Device\Include--list .\startup_stm32f4xx.lst --xref -o .\startup_stm32f4xx.o --depend .\startup_stm32f4xx.d)
