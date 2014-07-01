@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>Dashboard_2</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -359,7 +359,7 @@
             <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>HSE_VALUE=8000000, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
               <IncludePath>.\inc;.\inc\Core;.\src</IncludePath>
             </VariousControls>
@@ -434,6 +434,11 @@
               <FileType>5</FileType>
               <FilePath>.\inc\Core\core_cmInstr.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_periph.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\stm32f4xx_periph.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -453,6 +458,51 @@
               <FileName>startup_stm32f4xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\src\startup_stm32f4xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>Nmea.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Nmea.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_periph.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\stm32f4xx_periph.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\stm32f4xx_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>misc_funct.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\misc_funct.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\stm32f4xx_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\stm32f4xx_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_init_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\stm32f4xx_init_rcc.c</FilePath>
             </File>
           </Files>
         </Group>
