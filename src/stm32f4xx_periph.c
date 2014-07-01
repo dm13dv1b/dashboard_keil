@@ -6,7 +6,7 @@ uint32_t Timer_Frequency = 42000;
 //uint32_t prescaler;
 char usart_buffer[MAX_STRLEN];
 #define ARRAYSIZE 128*4
-uint16_t adc_buffer[ARRAYSIZE];
+extern uint16_t adc_buffer[ARRAYSIZE];
 
 void USART2_INIT(void);
 void TIM2_Init(void);

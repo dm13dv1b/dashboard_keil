@@ -3,10 +3,61 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-D:\ARM projektek\04 Dashboard\project.uvproj
+D:\ARM_projektek\04_Dashboard\project.uvproj
 Project File Date:  06/05/2014
 
 <h2>Output:</h2>
-</pre>
-</body>
-</html>
+Rebuild target 'Target 1'
+compiling system_stm32f4xx.c...
+compiling main.c...
+assembling startup_stm32f4xx.s...
+compiling misc.c...
+compiling Nmea.c...
+src\Nmea.c(7): warning:  #550-D: variable "chk_ok" was set but never used
+  static uint16_t chk_ok;
+src\Nmea.c: 1 warning, 0 errors
+compiling stm32f4xx_it.c...
+compiling stm32f4xx_periph.c...
+src\stm32f4xx_periph.c(50): warning:  #61-D: integer operation result is out of range
+                GPIOD ->        OSPEEDR         |=      (2<<30);                                                //50Mhz fast speed
+src\stm32f4xx_periph.c(50): warning:  #68-D: integer conversion resulted in a change of sign
+                GPIOD ->        OSPEEDR         |=      (2<<30);                                                //50Mhz fast speed
+src\stm32f4xx_periph.c: 2 warnings, 0 errors
+compiling stm32f4xx_rcc.c...
+linking...
+Program Size: Code=3440 RO-data=424 RW-data=72 ZI-data=3200  
+".\project.axf" - 0 Error(s), 3 Warning(s).
+Load "D:\\ARM_projektek\\04_Dashboard\\project.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+g and 4 error messages.
+".\project.axf" - 4 Error(s), 2 Warning(s).
+Target not created
+multiply defined (by stm32f4xx_periph.o and main.o).
+.\project.axf: Error: L6200E: Symbol prescaler multiply defined (by stm32f4xx_periph.o and main.o).
+.\project.axf: Error: L6200E: Symbol i multiply defined (by stm32f4xx_it.o and misc.o).
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 6 error messages.
+".\project.axf" - 6 Error(s), 3 Warning(s).
+Target not created
+en the macro name "USE_STDPERIPH_DRIVER" and its replacement text
+    #define USE_STDPERIPH_DRIVER*/
+.\inc\stm32f4xx.h(6965): error:  #5: cannot open source input file "stm32f4xx_conf.h": No such file or directory
+    #include "stm32f4xx_conf.h"
+src\stm32f4xx_it.c: 1 warning, 1 error
+compiling stm32f4xx_periph.c...
+.\inc\stm32f4xx.h(80): warning:  #2775-D: white space is required between the macro name "USE_STDPERIPH_DRIVER" and its replacement text
+    #define USE_STDPERIPH_DRIVER*/
+.\inc\stm32f4xx.h(6965): error:  #5: cannot open source input file "stm32f4xx_conf.h": No such file or directory
+    #include "stm32f4xx_conf.h"
+src\stm32f4xx_periph.c: 1 warning, 1 error
+compiling stm32f4xx_rcc.c...
+.\inc\stm32f4xx.h(80): warning:  #2775-D: white space is required between the macro name "USE_STDPERIPH_DRIVER" and its replacement text
+    #define USE_STDPERIPH_DRIVER*/
+.\inc\stm32f4xx.h(6965): error:  #5: cannot open source input file "stm32f4xx_conf.h": No such file or directory
+    #include "stm32f4xx_conf.h"
+src\stm32f4xx_rcc.c: 1 warning, 1 error
+".\project.axf" - 7 Error(s), 7 Warning(s).
+Target not created

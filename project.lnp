@@ -2,6 +2,11 @@
 ".\system_stm32f4xx.o"
 ".\main.o"
 ".\startup_stm32f4xx.o"
+".\misc.o"
+".\nmea.o"
+".\stm32f4xx_it.o"
+".\stm32f4xx_periph.o"
+".\stm32f4xx_rcc.o"
 --strict --scatter ".\project.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

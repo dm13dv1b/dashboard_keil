@@ -18,7 +18,7 @@ void Delay(__IO uint32_t nTime);
 uint16_t temp;
 extern char usart_buffer[MAX_STRLEN];
 static __IO uint32_t TimingDelay;
-uint32_t i;
+//static uint32_t i;
 
 void SysTick_Handler(void)
 {

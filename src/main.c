@@ -8,7 +8,7 @@
 
 #define ARRAYSIZE 128*4
 
-uint16_t adc_buffer[ARRAYSIZE];
+//uint16_t adc_buffer[ARRAYSIZE];
 
 int main(void)
 {
