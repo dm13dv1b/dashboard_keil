@@ -42,7 +42,8 @@ void EXTI2_Init(void)
 	NVIC_EnableIRQ(EXTI1_IRQn);
 }
 
-void USART_puts(USART_TypeDef* USARTx, volatile char *s){
+void USART_puts(USART_TypeDef* USARTx, volatile char *s)
+{
 
 	while(*s){
 		// wait until data register is empty
@@ -50,27 +51,6 @@ void USART_puts(USART_TypeDef* USARTx, volatile char *s){
 		USART_SendData(USARTx, *s);
 		*s++;
 	}
-}
-
-void USART1_INIT(uint32_t baudrate){
-
-	// PA9 USART 1 TX
-	// PA10 USART 1 RX
-
-	GPIOA	->	MODER 		|=	GPIO_MODER_MODER9_1;		// RX PD6 to alternate function output push-pull at 50 MHz 0x10
-	GPIOA	->	MODER 		|=	GPIO_MODER_MODER10_1;		// TX PD5 to alternate function output push-pull at 50 MHz 0x10
-	GPIOA ->	OSPEEDR		|=  GPIO_OSPEEDER_OSPEEDR9_0 | GPIO_OSPEEDER_OSPEEDR9_1;		//50Mhz fast speed
-	GPIOA ->	OSPEEDR		|=	GPIO_OSPEEDER_OSPEEDR10_0 | GPIO_OSPEEDER_OSPEEDR10_1;
-	GPIOA ->	PUPDR			|=  GPIO_PUPDR_PUPDR9_0 | GPIO_PUPDR_PUPDR10_0;
-	GPIOA	->	AFR[1]		|=	(7<<4);
-	GPIOA	->	AFR[1]		|=	(7<<8);
-
-	BRR = (SystemCoreClock/4) / (BaudRate*16);
-	USART1 ->	BRR = (68 << 4 ) + 0x06; //38400br 
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // enable the USART1 receive interrupt
-	NVIC_SetPriority(USART1_IRQn, 2);
-	NVIC_EnableIRQ(USART1_IRQn);
-	USART1 -> CR1 |= USART_CR1_UE | USART_CR1_RE | USART_CR1_TE;
 }
 
 void LED_Init(void)
@@ -123,6 +103,8 @@ void ADC_Init(void)
 	ADC -> CCR |=ADC_CCR_TSVREFE;	// Enable TSVREFE
 	ADC -> CCR |=ADC_CCR_VBATE;		// Enable VBATE
 	ADC1 -> DR = 0;
+	USART_puts(USART1, "ADC init ok");
+	USART_puts(USART1, "\n\r");
 }
 
 void TIM2_Init(void)
@@ -137,6 +119,8 @@ void TIM2_Init(void)
 	NVIC_SetPriority(TIM2_IRQn, 0x01);
 	TIM2->DIER |= TIM_DIER_UIE;
 	TIM2->CR1 |= TIM_CR1_CEN;
+	USART_puts(USART1, "TIM2 init ok");
+	USART_puts(USART1, "\n\r");
 }
 
 void TIM3_Init(void)
@@ -144,6 +128,8 @@ void TIM3_Init(void)
 	TIM3->PSC = 1999;
   TIM3->ARR = 41999;
 	TIM3->CR1 |= TIM_CR1_CEN;
+	USART_puts(USART1, "TIM3 init ok");
+	USART_puts(USART1, "\n\r");
 }
 
 void TIM4_Init(void)
@@ -151,11 +137,31 @@ void TIM4_Init(void)
 	TIM4->PSC = 1999;
   TIM4->ARR = 41999;
 	TIM4->CR1 |= TIM_CR1_CEN;
+	USART_puts(USART1, "TIM4 init ok");
+	USART_puts(USART1, "\n\r");
+}
+
+void USART1_INIT(uint32_t baudrate)
+{
+	GPIOB	->	MODER 		|=	GPIO_MODER_MODER6_1;		// RX PD6 to alternate function output push-pull at 50 MHz 0x10
+	GPIOB	->	MODER 		|=	GPIO_MODER_MODER7_1;		// TX PD5 to alternate function output push-pull at 50 MHz 0x10
+	GPIOB ->	OSPEEDR		|=  GPIO_OSPEEDER_OSPEEDR6_0 | GPIO_OSPEEDER_OSPEEDR6_1;		//50Mhz fast speed
+	GPIOB ->	OSPEEDR		|=	GPIO_OSPEEDER_OSPEEDR7_0 | GPIO_OSPEEDER_OSPEEDR7_1;
+	GPIOB ->	PUPDR			|=  GPIO_PUPDR_PUPDR6_0;
+	GPIOB	->	AFR[0]		|=	(7<<24);
+	GPIOB	->	AFR[0]		|=	(7<<28);
+
+	USART1 ->	BRR = (136 << 4 ) + 0x0C; //38400br 
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // enable the USART1 receive interrupt
+	NVIC_SetPriority(USART1_IRQn, 2);
+	NVIC_EnableIRQ(USART1_IRQn);
+	USART1 -> CR1 |= USART_CR1_UE | USART_CR1_RE | USART_CR1_TE;
+	USART_puts(USART1, "USART1 init ok");
+	USART_puts(USART1, "\n\r");
 }
 
 void USART2_INIT(void)
 {
-	BaudRate = 38400;
 	GPIOA	->	MODER 		|=	GPIO_MODER_MODER3_1;		// RX PD6 to alternate function output push-pull at 50 MHz 0x10
 	GPIOA	->	MODER 		|=	GPIO_MODER_MODER2_1;		// TX PD5 to alternate function output push-pull at 50 MHz 0x10
 	GPIOA ->	OSPEEDR		|=  GPIO_OSPEEDER_OSPEEDR3_0 | GPIO_OSPEEDER_OSPEEDR3_1;		//50Mhz fast speed
@@ -167,6 +173,8 @@ void USART2_INIT(void)
 	USART2 ->	BRR = (68 << 4 ) + 0x06; //38400br
 	USART2 -> CR1 |= USART_CR1_UE | USART_CR1_RE | USART_CR1_TE;
 	USART2 -> CR3 |= USART_CR3_DMAR;
+	USART_puts(USART1, "USART2 init ok");
+	USART_puts(USART1, "\n\r");
 }
 
 void DMA1_Init(void)
@@ -182,7 +190,9 @@ void DMA1_Init(void)
 	DMA1_Stream5 -> CR |= DMA_SxCR_TCIE;				// transaction complete interrupt
 	DMA1_Stream5 -> CR |= DMA_SxCR_CIRC;				// non enable continous mode
 	DMA1_Stream5 -> CR |= DMA_SxCR_EN;					// enable Stream6
-	NVIC_EnableIRQ(DMA1_Stream5_IRQn);					// enable IRQ	
+	NVIC_EnableIRQ(DMA1_Stream5_IRQn);					// enable IRQ
+	USART_puts(USART1, "DMA1 init ok");
+	USART_puts(USART1, "\n\r");
 }
 
 void DMA2_Init(void)
@@ -199,4 +209,6 @@ void DMA2_Init(void)
 	DMA2_Stream0 -> CR |= DMA_SxCR_CIRC;				// non enable continous mode
 	DMA2_Stream0 -> CR |= DMA_SxCR_EN;					// enable Stream0
 	NVIC_EnableIRQ(DMA2_Stream0_IRQn);					// enable IRQ
+	USART_puts(USART1, "DMA2 init ok");
+	USART_puts(USART1, "\n\r");
 }

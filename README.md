@@ -5,10 +5,10 @@ Aprilia Pegaso secondary dashboard in Keil UVision
 
 Board: STM32F4Discovery (STM32F407VG)
 
-USART1 added debug console // PA9 USART 1 TX
-	                         // PA10 USART 1 RX
+USART1 APB2 SYSCLK/2 38400 added debug console // PB6 USART 1 TX
+	                   // PB7 USART 1 RX
 	                       
-USART2 GPS 38400            //PA2 USART 2 TX
+USART2 APB1 SYSCLE/4 GPS 38400            //PA2 USART 2 TX
                             //PA3 USART 2 RX
                             
 DMA1 STREAM 5 USART2 buffer

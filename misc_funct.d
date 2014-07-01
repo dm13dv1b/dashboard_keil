@@ -12,7 +12,9 @@
 .\misc_funct.o: .\inc\stm32f4xx_rcc.h
 .\misc_funct.o: .\inc\stm32f4xx_usart.h
 .\misc_funct.o: .\inc\misc.h
+.\misc_funct.o: .\inc\stm32f4xx_periph.h
 .\misc_funct.o: .\inc\nmea.h
 .\misc_funct.o: .\inc\main.h
 .\misc_funct.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 .\misc_funct.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+.\misc_funct.o: .\inc\misc_funct.h

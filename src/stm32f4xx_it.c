@@ -19,6 +19,7 @@ void EXTI2_IRQHandler(void)__irq;
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
 
+extern uint8_t send_voltage, send_temperature;
 uint16_t temp;
 extern char usart_buffer[MAX_STRLEN];
 static __IO uint32_t TimingDelay;
@@ -57,25 +58,42 @@ void delay_ms(uint32_t ms)
 		}
 }
 
-void USART1_IRQHandler(void){
+void USART1_IRQHandler(void)
+	{
 	
 	// check if the USART1 receive interrupt flag was set
 	if( USART_GetITStatus(USART1, USART_IT_RXNE) ){
 		
-		static uint8_t cnt = 0; // this counter is used to determine the string length
+		static uint16_t cnt = 0; // this counter is used to determine the string length
 		char t = USART1->DR; // the character from the USART1 data register is saved in t
-		
-		/* check if the received character is not the LF character (used to determine end of string) 
-		 * or the if the maximum string length has been been reached 
-		 */
+
 		if( (t != '\n') && (cnt < MAX_STRLEN) ){ 
-			received_string[cnt] = t;
+			USART1_string[cnt] = t;
 			cnt++;
 		}
 		else{ // otherwise reset the character counter and print the received string
 			cnt = 0;
 			//USART_puts(USART2, received_string);
 		}
+	}
+	if ((USART1_string[0] == 'V') && (USART1_string[1] == 'S'))
+	{
+		send_voltage = 1;
+	}
+
+	if ((USART1_string[0] == 'V') && (USART1_string[1] == 'R'))
+	{
+		send_voltage = 0;
+	}
+	
+	if ((USART1_string[0] == 'T') && (USART1_string[1] == 'S'))
+	{
+		send_temperature = 1;
+	}
+	
+	if ((USART1_string[0] == 'T') && (USART1_string[1] == 'R'))
+	{
+		send_temperature = 0;
 	}
 }
 	
@@ -86,7 +104,6 @@ void TIM2_IRQHandler(void)
 		TIM2->SR &= ~TIM_SR_UIF;
 		GPIOD->ODR	|= GPIO_ODR_ODR_12;
 		Delay(30);
-		//USART_puts(USART1, "Sampling\r\n");
 		GPIOD->ODR &= ~GPIO_ODR_ODR_12;
 		Read_USART();
 		Read_ADC();

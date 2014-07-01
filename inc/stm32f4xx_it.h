@@ -3,7 +3,7 @@
 
 #define MAX_STRLEN 256
 
-extern char received_string[MAX_STRLEN+1];
+extern char USART1_string[12];
 extern char received_buff[MAX_STRLEN+1];
 
 void USART2_IRQHandler(void);

@@ -41,6 +41,7 @@ int main(void)
 	GPIOD->ODR	^= GPIO_ODR_ODR_14;
 	GPIOD->ODR	^= GPIO_ODR_ODR_15;
 
+	USART1_INIT(38400);
 	TextOut("Start init...n\r");
 	ADC_Init();
 	DMA1_Init();
@@ -50,7 +51,6 @@ int main(void)
 	TIM4_Init();
 	EXTI1_Init();
 	EXTI2_Init();
-	//USART1_INIT(38400);
 	USART2_INIT();
 	TextOut("End init...\n\r");
 	
