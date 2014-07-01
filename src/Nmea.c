@@ -9,6 +9,7 @@ char *pch;
 char *p;
 uint32_t tmp = 0;
 
+/*
 void TextOut(char str)											//ITM Stimulus port 0 -> 1-be
 {
 	do {
@@ -16,6 +17,7 @@ void TextOut(char str)											//ITM Stimulus port 0 -> 1-be
 		ITM_SendChar(str);														//ITM Send char printf helyett
 	} while (str++);
 }
+*/
 
 static uint32_t NMEA_atoi(char *p)
 {

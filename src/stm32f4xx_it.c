@@ -14,6 +14,8 @@ void TIM2_IRQHandler(void);
 void DMA1_Stream5_IRQHandler(void);
 void DMA2_Stream0_IRQHandler(void);
 void SysTick_Handler(void);
+void EXTI1_IRQHandler(void)__irq;
+void EXTI2_IRQHandler(void)__irq;
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
 
@@ -120,3 +122,33 @@ void DMA2_Stream0_IRQHandler(void)
 	}
 	NVIC->ICPR[0] |=(1<<7);
 }
+
+void EXTI1_IRQHandler(void)__irq //Kezeli a PA1 lábra kapcsolt számlálást
+	{
+		//TIM2	->	CR1				^=	(1<<0);							//Timer Disable
+		NVIC->ICER[0] 			&= ~(1<<7);							//Disable this interrupt during processing
+			//Itt fogsz azt csinálni amit szeretnél
+		//EXTI1_counter = TIM2->CNT;													//STM Studio debughoz
+		//EXTI1_clock = ((SystemCoreClock/2)/TIM2->CNT);
+		//TIM2	->	CNT = 0;
+		//TIM2	->	SR				 =	0;													//Clear UIF bit
+		//TIM2	->	CR1				|=	(1<<0);								//Timer Enable
+		EXTI->PR 	|=(1<<1);													//Pending request clear
+		NVIC->ICPR[0] 			|= (1<<7);								//Clear the Pending Interrupt
+		NVIC->ISER[0] |= (1 << 7) | (1 << 8);										//Reenable the EXTI1 Interrupt
+	}
+
+void EXTI2_IRQHandler(void)__irq //Kezeli a PA2 lábra kapcsolt számlálást
+	{
+		//TIM5	->	CR1				^=	(1<<0);							//Timer Disable
+		NVIC->ICER[0] 			&= ~(1<<8);							//Disable this interrupt during processing
+			//Itt fogsz azt csinálni amit szeretnél
+		//EXTI2_counter = TIM5->CNT;													//STM Studio debughoz
+		//EXTI2_clock = ((SystemCoreClock/2)/TIM5->CNT);
+		//TIM5	->	CNT = 0;
+		//TIM5	->	SR		=	0;													//Clear UIF bit
+		//TIM5	->	CR1				|=	(1<<0);								//Timer Enable
+		EXTI->PR 	|= (1<<3);													//Pending request clear
+		NVIC->ICPR[0] 			|= (1<<8);								//Clear the Pending Interrupt
+		NVIC->ISER[0] |= (1 << 8) | (1 << 7);										//Reenable the EXTI2 Interrupt
+	}

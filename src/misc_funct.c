@@ -1,8 +1,10 @@
 //misc.c
 #include "stm32f4xx.h"
 #include "nmea.h"
+#include "main.h"
 #include "misc.h"
 #include <string.h>
+#include <stdio.h>
 
 #define MAX_STRLEN 256
 #define MAX_STRLEN2 12
@@ -17,6 +19,7 @@ uint16_t i;
 char received_string[MAX_STRLEN+1];
 char received_buff[MAX_STRLEN+1];
 char received[6];
+char my_string[8];
 extern char usart_buffer[MAX_STRLEN];
 extern char * pch;
 extern char *p;
@@ -59,6 +62,10 @@ void Average(void)
 	temp_adc +=25;
 
 	temperature = temp_adc;
+	TextOut("Internal temperature: ");
+	sprintf(my_string, "%f", temperature);
+	TextOut(my_string);
+	TextOut("\n\r");
 	temp_adc = 0;
 
 	for ( i=step+1; i < ARRAYSIZE; i+=2)
@@ -71,4 +78,8 @@ void Average(void)
 	temp_adc /= 1000;
 	temp_adc *= 2;
 	voltage = temp_adc;
+	TextOut("Internal volatege: ");
+	sprintf(my_string, "%f", voltage);
+	TextOut(my_string);
+	TextOut("\n\r");
 }

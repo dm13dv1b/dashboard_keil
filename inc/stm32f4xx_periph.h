@@ -13,4 +13,6 @@ void DMA1_Init(void);
 void DMA2_Init(void);
 void LED_Init(void);
 void ADC_Init(void);
+void EXTI1_Init(void);
+void EXTI2_Init(void);
 void USART_puts(USART_TypeDef* USARTx, volatile char *s);

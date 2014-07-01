@@ -21,6 +21,24 @@ void ADC_Init(void);
 void LED_Init(void);
 void USART1_Init(uint32_t baudrate);
 void USART_puts(USART_TypeDef* USARTx, volatile char *s);
+void EXTI1_Init(void);
+void EXTI2_Init(void);
+
+void EXTI1_Init(void)
+{
+	SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI1_PB; //EXTI 1 PB 1
+	EXTI->IMR |= EXTI_IMR_MR1;		//Enable interrupt mask
+	EXTI->FTSR |= EXTI_FTSR_TR1;  //Falling trigger selection
+	NVIC_EnableIRQ(EXTI1_IRQn);
+}
+
+void EXTI2_Init(void)
+{
+	SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI2_PB; //EXTI 2 PB 2
+	EXTI->IMR |= EXTI_IMR_MR2;
+	EXTI->FTSR |= EXTI_FTSR_TR2;
+	NVIC_EnableIRQ(EXTI1_IRQn);
+}
 
 void USART_puts(USART_TypeDef* USARTx, volatile char *s){
 
