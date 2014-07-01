@@ -9,6 +9,8 @@ static uint32_t prescaler;
 void USART1_INIT(uint32_t baudrate);
 void USART2_INIT(void);
 void TIM2_Init(void);
+void TIM3_Init(void);
+void TIM4_Init(void);
 void DMA1_Init(void);
 void DMA2_Init(void);
 void LED_Init(void);

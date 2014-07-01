@@ -15,6 +15,8 @@ extern uint16_t adc_buffer[ARRAYSIZE];
 
 void USART2_INIT(void);
 void TIM2_Init(void);
+void TIM3_Init(void);
+void TIM4_Init(void);
 void DMA1_Init(void);
 void DMA2_Init(void);
 void ADC_Init(void);
@@ -129,12 +131,26 @@ void TIM2_Init(void)
 	prescaler = SystemCoreClock/2;
 	prescaler /=Timer_Frequency;
 	prescaler -=1;
-	TIM2	->	PSC			=		Timer_Frequency-1;
+	TIM2	->	PSC			=		(Timer_Frequency-1);
 	TIM2	->	ARR			=		prescaler;
 	NVIC_EnableIRQ(TIM2_IRQn);
 	NVIC_SetPriority(TIM2_IRQn, 0x01);
 	TIM2->DIER |= TIM_DIER_UIE;
 	TIM2->CR1 |= TIM_CR1_CEN;
+}
+
+void TIM3_Init(void)
+{
+	TIM3->PSC = 1999;
+  TIM3->ARR = 41999;
+	TIM3->CR1 |= TIM_CR1_CEN;
+}
+
+void TIM4_Init(void)
+{
+	TIM4->PSC = 1999;
+  TIM4->ARR = 41999;
+	TIM4->CR1 |= TIM_CR1_CEN;
 }
 
 void USART2_INIT(void)

@@ -8,35 +8,25 @@ Project File Date:  07/01/2014
 
 <h2>Output:</h2>
 Build target 'Dashboard_2'
-compiling main.c...
+compiling stm32f4xx_periph.c...
 linking...
-Program Size: Code=8196 RO-data=600 RW-data=84 ZI-data=3452  
+Program Size: Code=8420 RO-data=600 RW-data=92 ZI-data=3452  
 ".\project.axf" - 0 Error(s), 0 Warning(s).
 Load "D:\\ARM_projektek\\04_Dashboard\\project.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
-
-Verify OK.
-Load "D:\\ARM_projektek\\04_Dashboard\\project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-shed: 2 information, 0 warning and 1 error messages.
-".\project.axf" - 1 Error(s), 1 Warning(s).
-Target not created
-
-gs, 0 errors
-compiling stm32f4xx_init_rcc.c...
+</pre>
+</body>
+</html>
+ify OK.
+ set but never used
+  static uint32_t EXTI1_counter, EXTI2_counter, EXTI1_clock, EXTI2_clock;
+src\stm32f4xx_it.c(25): warning:  #550-D: variable "EXTI1_clock" was set but never used
+  static uint32_t EXTI1_counter, EXTI2_counter, EXTI1_clock, EXTI2_clock;
+src\stm32f4xx_it.c(25): warning:  #550-D: variable "EXTI2_clock" was set but never used
+  static uint32_t EXTI1_counter, EXTI2_counter, EXTI1_clock, EXTI2_clock;
+src\stm32f4xx_it.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=4008 RO-data=424 RW-data=76 ZI-data=3452  
-".\project.axf" - 0 Error(s), 3 Warning(s).
-rget DLL has been cancelled
-Load "D:\\ARM_projektek\\04_Dashboard\\project.axf" 
-No Algorithm found for: 08000000H - 0800113FH
-Erase skipped!
-Error: Flash Download failed  -  "Cortex-M4"
-Load "D:\\ARM_projektek\\04_Dashboard\\project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
+Program Size: Code=8352 RO-data=600 RW-data=100 ZI-data=3452  
+".\project.axf" - 0 Error(s), 4 Warning(s).

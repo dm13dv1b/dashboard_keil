@@ -46,6 +46,8 @@ int main(void)
 	DMA1_Init();
 	DMA2_Init();
 	TIM2_Init();
+	TIM3_Init();
+	TIM4_Init();
 	EXTI1_Init();
 	EXTI2_Init();
 	//USART1_INIT(38400);

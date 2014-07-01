@@ -22,7 +22,7 @@ void Delay(__IO uint32_t nTime);
 uint16_t temp;
 extern char usart_buffer[MAX_STRLEN];
 static __IO uint32_t TimingDelay;
-//static uint32_t i;
+uint16_t EXTI1_counter, EXTI2_counter, EXTI1_clock, EXTI2_clock;
 
 void SysTick_Handler(void)
 {
@@ -124,14 +124,14 @@ void DMA2_Stream0_IRQHandler(void)
 
 void EXTI1_IRQHandler(void)__irq //Kezeli a PA1 lábra kapcsolt számlálást
 	{
-		//TIM2	->	CR1				^=	(1<<0);							//Timer Disable
+		TIM3	->	CR1				^=	(1<<0);							//Timer Disable
 		NVIC->ICER[0] 			&= ~(1<<7);							//Disable this interrupt during processing
 			//Itt fogsz azt csinálni amit szeretnél
-		//EXTI1_counter = TIM2->CNT;													//STM Studio debughoz
-		//EXTI1_clock = ((SystemCoreClock/2)/TIM2->CNT);
-		//TIM2	->	CNT = 0;
-		//TIM2	->	SR				 =	0;													//Clear UIF bit
-		//TIM2	->	CR1				|=	(1<<0);								//Timer Enable
+		EXTI1_counter = TIM3->CNT;													//STM Studio debughoz
+		EXTI1_clock = ((SystemCoreClock/2)/TIM3->CNT);
+		TIM3	->	CNT = 0;
+		TIM3	->	SR				 =	0;													//Clear UIF bit
+		TIM3	->	CR1				|=	(1<<0);								//Timer Enable
 		EXTI->PR 	|=(1<<1);													//Pending request clear
 		NVIC->ICPR[0] 			|= (1<<7);								//Clear the Pending Interrupt
 		NVIC->ISER[0] |= (1 << 7) | (1 << 8);										//Reenable the EXTI1 Interrupt
@@ -139,14 +139,14 @@ void EXTI1_IRQHandler(void)__irq //Kezeli a PA1 lábra kapcsolt számlálást
 
 void EXTI2_IRQHandler(void)__irq //Kezeli a PA2 lábra kapcsolt számlálást
 	{
-		//TIM5	->	CR1				^=	(1<<0);							//Timer Disable
+		TIM4	->	CR1				^=	(1<<0);							//Timer Disable
 		NVIC->ICER[0] 			&= ~(1<<8);							//Disable this interrupt during processing
 			//Itt fogsz azt csinálni amit szeretnél
-		//EXTI2_counter = TIM5->CNT;													//STM Studio debughoz
-		//EXTI2_clock = ((SystemCoreClock/2)/TIM5->CNT);
-		//TIM5	->	CNT = 0;
-		//TIM5	->	SR		=	0;													//Clear UIF bit
-		//TIM5	->	CR1				|=	(1<<0);								//Timer Enable
+		EXTI2_counter = TIM4->CNT;													//STM Studio debughoz
+		EXTI2_clock = ((SystemCoreClock/2)/TIM4->CNT);
+		TIM4	->	CNT = 0;
+		TIM4	->	SR		=	0;													//Clear UIF bit
+		TIM4	->	CR1				|=	(1<<0);								//Timer Enable
 		EXTI->PR 	|= (1<<3);													//Pending request clear
 		NVIC->ICPR[0] 			|= (1<<8);								//Clear the Pending Interrupt
 		NVIC->ISER[0] |= (1 << 8) | (1 << 7);										//Reenable the EXTI2 Interrupt
