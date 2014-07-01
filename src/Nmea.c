@@ -9,16 +9,6 @@ char *pch;
 char *p;
 uint32_t tmp = 0;
 
-/*
-void TextOut(char str)											//ITM Stimulus port 0 -> 1-be
-{
-	do {
-		if(str=='\n') ITM_SendChar('\r');
-		ITM_SendChar(str);														//ITM Send char printf helyett
-	} while (str++);
-}
-*/
-
 static uint32_t NMEA_atoi(char *p)
 {
 	uint32_t out = 0;
@@ -135,13 +125,5 @@ void NMEA_Parse(char *buf, uint16_t len)
 		p += 11;
 		gpsdata.sats = (p[0] - '0') * 10 + p[1] - '0';
 		GPIOD->ODR ^= GPIO_ODR_ODR_15;
-	}
-	if (gpsdata.rmc_valid && gpsdata.valid == 1)
-	{
-		//GPIOD->ODR |= GPIO_ODR_ODR_15;
-	}
-	else
-	{
-		//GPIOD->ODR &= ~GPIO_ODR_ODR_15;
 	}
 }

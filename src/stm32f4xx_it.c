@@ -42,7 +42,6 @@ void TimingDelay_Decrement(void)
 void Delay(__IO uint32_t nTime)
 {
 	TimingDelay = nTime;
-	//while((SysTick->CTRL & 0x00010000)==0);
 	while(TimingDelay != 0);
 }
 

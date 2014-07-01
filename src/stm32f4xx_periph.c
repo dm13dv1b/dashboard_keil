@@ -51,15 +51,7 @@ void USART_puts(USART_TypeDef* USARTx, volatile char *s){
 }
 
 void USART1_INIT(uint32_t baudrate){
-	
-	/* This is a concept that has to do with the libraries provided by ST
-	 * to make development easier the have made up something similar to 
-	 * classes, called TypeDefs, which actually just define the common
-	 * parameters that every peripheral needs to work correctly
-	 * 
-	 * They make our life easier because we don't have to mess around with 
-	 * the low level stuff of setting bits in the correct registers
-	 */
+
 	// PA9 USART 1 TX
 	// PA10 USART 1 RX
 
@@ -70,12 +62,7 @@ void USART1_INIT(uint32_t baudrate){
 	GPIOA ->	PUPDR			|=  GPIO_PUPDR_PUPDR9_0 | GPIO_PUPDR_PUPDR10_0;
 	GPIOA	->	AFR[1]		|=	(7<<4);
 	GPIOA	->	AFR[1]		|=	(7<<8);
-	
-	/* Here the USART1 receive interrupt is enabled
-	 * and the interrupt controller is configured 
-	 * to jump to the USART1_IRQHandler() function
-	 * if the USART1 receive interrupt occurs
-	 */
+
 	BRR = (SystemCoreClock/4) / (BaudRate*16);
 	USART1 ->	BRR = (68 << 4 ) + 0x06; //38400br 
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // enable the USART1 receive interrupt

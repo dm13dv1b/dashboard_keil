@@ -11,8 +11,6 @@
 
 void TextOut(const char *str);
 
-//uint16_t adc_buffer[ARRAYSIZE];
-
 void TextOut(const char *str)											//ITM Stimulus port 0 -> 1-be
 {
 	do {
@@ -56,6 +54,5 @@ int main(void)
 	
 	while(1)
 	{
-		//USART_puts(USART1, "Debug session started\r\n");
 	}
 }

@@ -1,4 +1,4 @@
-
+#include "stm32f4xx.h"
 extern struct gpsdata_t gpsdata;
 
 void NMEA_Parse(char *buf, uint16_t len);
