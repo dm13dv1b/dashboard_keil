@@ -1,4 +1,5 @@
 .\misc.o: src\misc.c
+.\misc.o: .\inc\misc.h
 .\misc.o: .\inc\stm32f4xx.h
 .\misc.o: .\inc\Core\core_cm4.h
 .\misc.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
@@ -6,6 +7,9 @@
 .\misc.o: .\inc\Core\core_cmFunc.h
 .\misc.o: .\inc\Core\core_cm4_simd.h
 .\misc.o: .\inc\system_stm32f4xx.h
-.\misc.o: .\inc\nmea.h
+.\misc.o: .\inc\stm32f4xx_conf.h
+.\misc.o: .\inc\stm32f4xx_gpio.h
+.\misc.o: .\inc\stm32f4xx.h
+.\misc.o: .\inc\stm32f4xx_rcc.h
+.\misc.o: .\inc\stm32f4xx_usart.h
 .\misc.o: .\inc\misc.h
-.\misc.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h

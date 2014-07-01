@@ -6,4 +6,10 @@
 .\stm32f4xx_periph.o: .\inc\Core\core_cmFunc.h
 .\stm32f4xx_periph.o: .\inc\Core\core_cm4_simd.h
 .\stm32f4xx_periph.o: .\inc\system_stm32f4xx.h
+.\stm32f4xx_periph.o: .\inc\stm32f4xx_conf.h
+.\stm32f4xx_periph.o: .\inc\stm32f4xx_gpio.h
+.\stm32f4xx_periph.o: .\inc\stm32f4xx.h
+.\stm32f4xx_periph.o: .\inc\stm32f4xx_rcc.h
+.\stm32f4xx_periph.o: .\inc\stm32f4xx_usart.h
+.\stm32f4xx_periph.o: .\inc\misc.h
 .\stm32f4xx_periph.o: .\inc\stm32f4xx_periph.h

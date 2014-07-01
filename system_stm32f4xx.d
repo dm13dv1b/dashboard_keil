@@ -6,3 +6,9 @@
 .\system_stm32f4xx.o: .\inc\Core\core_cmFunc.h
 .\system_stm32f4xx.o: .\inc\Core\core_cm4_simd.h
 .\system_stm32f4xx.o: .\inc\system_stm32f4xx.h
+.\system_stm32f4xx.o: .\inc\stm32f4xx_conf.h
+.\system_stm32f4xx.o: .\inc\stm32f4xx_gpio.h
+.\system_stm32f4xx.o: .\inc\stm32f4xx.h
+.\system_stm32f4xx.o: .\inc\stm32f4xx_rcc.h
+.\system_stm32f4xx.o: .\inc\stm32f4xx_usart.h
+.\system_stm32f4xx.o: .\inc\misc.h

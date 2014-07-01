@@ -7,9 +7,15 @@
 .\main.o: .\inc\Core\core_cmFunc.h
 .\main.o: .\inc\Core\core_cm4_simd.h
 .\main.o: .\inc\system_stm32f4xx.h
+.\main.o: .\inc\stm32f4xx_conf.h
+.\main.o: .\inc\stm32f4xx_gpio.h
+.\main.o: .\inc\stm32f4xx.h
+.\main.o: .\inc\stm32f4xx_rcc.h
+.\main.o: .\inc\stm32f4xx_usart.h
+.\main.o: .\inc\misc.h
 .\main.o: .\inc\stm32f4xx_periph.h
 .\main.o: .\inc\stm32f4xx_it.h
 .\main.o: .\inc\nmea.h
-.\main.o: .\inc\stm32f4xx_rcc.h
+.\main.o: .\inc\stm32f4xx_init_rcc.h
 .\main.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 .\main.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h

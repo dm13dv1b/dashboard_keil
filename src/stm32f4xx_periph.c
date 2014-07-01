@@ -1,6 +1,11 @@
 /* stm32f4xx_periph.c */
 #include "stm32f4xx.h"
 #include "stm32f4xx_periph.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_usart.h"
+#include "stm32f4xx_rcc.h"
+#include "misc.h"
+
 #define MAX_STRLEN 256
 uint32_t Timer_Frequency = 42000;
 //uint32_t prescaler;
@@ -14,6 +19,52 @@ void DMA1_Init(void);
 void DMA2_Init(void);
 void ADC_Init(void);
 void LED_Init(void);
+void USART1_Init(uint32_t baudrate);
+void USART_puts(USART_TypeDef* USARTx, volatile char *s);
+
+void USART_puts(USART_TypeDef* USARTx, volatile char *s){
+
+	while(*s){
+		// wait until data register is empty
+		while( !(USARTx->SR & 0x00000040) ); 
+		USART_SendData(USARTx, *s);
+		*s++;
+	}
+}
+
+void USART1_INIT(uint32_t baudrate){
+	
+	/* This is a concept that has to do with the libraries provided by ST
+	 * to make development easier the have made up something similar to 
+	 * classes, called TypeDefs, which actually just define the common
+	 * parameters that every peripheral needs to work correctly
+	 * 
+	 * They make our life easier because we don't have to mess around with 
+	 * the low level stuff of setting bits in the correct registers
+	 */
+	// PA9 USART 1 TX
+	// PA10 USART 1 RX
+
+	GPIOA	->	MODER 		|=	GPIO_MODER_MODER9_1;		// RX PD6 to alternate function output push-pull at 50 MHz 0x10
+	GPIOA	->	MODER 		|=	GPIO_MODER_MODER10_1;		// TX PD5 to alternate function output push-pull at 50 MHz 0x10
+	GPIOA ->	OSPEEDR		|=  GPIO_OSPEEDER_OSPEEDR9_0 | GPIO_OSPEEDER_OSPEEDR9_1;		//50Mhz fast speed
+	GPIOA ->	OSPEEDR		|=	GPIO_OSPEEDER_OSPEEDR10_0 | GPIO_OSPEEDER_OSPEEDR10_1;
+	GPIOA ->	PUPDR			|=  GPIO_PUPDR_PUPDR9_0 | GPIO_PUPDR_PUPDR10_0;
+	GPIOA	->	AFR[1]		|=	(7<<4);
+	GPIOA	->	AFR[1]		|=	(7<<8);
+	
+	/* Here the USART1 receive interrupt is enabled
+	 * and the interrupt controller is configured 
+	 * to jump to the USART1_IRQHandler() function
+	 * if the USART1 receive interrupt occurs
+	 */
+	BRR = (SystemCoreClock/4) / (BaudRate*16);
+	USART1 ->	BRR = (68 << 4 ) + 0x06; //38400br 
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // enable the USART1 receive interrupt
+	NVIC_SetPriority(USART1_IRQn, 2);
+	NVIC_EnableIRQ(USART1_IRQn);
+	USART1 -> CR1 |= USART_CR1_UE | USART_CR1_RE | USART_CR1_TE;
+}
 
 void LED_Init(void)
 {
@@ -38,17 +89,15 @@ void LED_Init(void)
 	//LED init PD14
 		GPIOD	->	MODER			|=	(1<<28);						//PD14 = output
 		GPIOD ->	OTYPER		&=	(1<<14);						//Output Push/pull
-		GPIOD ->	OSPEEDR		&=	~(3<<28);						//50Mhz fast speed
-		GPIOD ->	OSPEEDR		|=	(2<<28);
-		GPIOD ->	PUPDR			&=	~(3<<28);						//PD14 pull up
-		GPIOD	->	PUPDR			|=	(1<<28);
+		GPIOD ->	OSPEEDR		|=	GPIO_OSPEEDER_OSPEEDR14_1;
+		GPIOD ->	PUPDR			|=	GPIO_PUPDR_PUPDR14_0;
 	//LED init PD14
 
-	//LED init PD14
-		GPIOD	->	MODER			|=	(1<<30);						//PD14 = output
+	//LED init PD15
+		GPIOD	->	MODER			|=	(1<<30);						//PD15 = output
 		GPIOD ->	OTYPER		&=	(1<<15);						//Output Push/pull
-		GPIOD ->	OSPEEDR		|=	(2<<30);						//50Mhz fast speed
-		GPIOD ->	PUPDR			|=	(1<<30);						//PD14 pull up
+		GPIOD ->	OSPEEDR		|=	GPIO_OSPEEDER_OSPEEDR15_1;						//50Mhz fast speed
+		GPIOD ->	PUPDR			|=	GPIO_PUPDR_PUPDR15_0;						//PD14 pull up
 	//LED init PD14
 }
 
@@ -78,7 +127,7 @@ void TIM2_Init(void)
 	TIM2	->	PSC			=		Timer_Frequency-1;
 	TIM2	->	ARR			=		prescaler;
 	NVIC_EnableIRQ(TIM2_IRQn);
-	NVIC_SetPriority(TIM2_IRQn, 0x04);
+	NVIC_SetPriority(TIM2_IRQn, 0x01);
 	TIM2->DIER |= TIM_DIER_UIE;
 	TIM2->CR1 |= TIM_CR1_CEN;
 }
