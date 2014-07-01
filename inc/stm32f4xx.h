@@ -93,7 +93,7 @@
 #endif /* HSE_VALUE */
 
 /**
- * @brief In the following line adjust the External High Speed oscillator (HSE) Startup 
+ * @brief In the foll_owing line adjust the External High Speed oscillator (HSE) Startup 
    Timeout value 
    */
 #if !defined  (HSE_STARTUP_TIMEOUT) 
@@ -6962,7 +6962,7 @@ typedef struct
   */ 
 
 #ifdef USE_STDPERIPH_DRIVER
-  //#include "stm32f4xx_conf.h"
+  #include "stm32f4xx_conf.h"
 #endif /* USE_STDPERIPH_DRIVER */
 
 /** @addtogroup Exported_macro

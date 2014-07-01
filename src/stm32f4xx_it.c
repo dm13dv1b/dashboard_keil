@@ -1,9 +1,11 @@
 /* stm32f4xx_it.c */
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
+#include "stm32f4xx_periph.h"
 #include "nmea.h"
 #include "main.h"
-#include "misc.h"
+#include "misc_funct.h"
+#include "stm32f4xx_usart.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -54,19 +56,28 @@ void delay_ms(uint32_t ms)
 		}
 }
 
-void USART2_IRQHandler(void)
-	{	
-		/*
-		temp = USART2->SR;
-		temp = USART2->DR;
-		t = 0;
-		if ((USART2 ->	SR &	USART_SR_RXNE) == 0)
-		{
-			char t = USART2->DR; // the character from the USART1 data register is saved in t
-				}
-		*/
+void USART1_IRQHandler(void){
+	
+	// check if the USART1 receive interrupt flag was set
+	if( USART_GetITStatus(USART1, USART_IT_RXNE) ){
+		
+		static uint8_t cnt = 0; // this counter is used to determine the string length
+		char t = USART1->DR; // the character from the USART1 data register is saved in t
+		
+		/* check if the received character is not the LF character (used to determine end of string) 
+		 * or the if the maximum string length has been been reached 
+		 */
+		if( (t != '\n') && (cnt < MAX_STRLEN) ){ 
+			received_string[cnt] = t;
+			cnt++;
+		}
+		else{ // otherwise reset the character counter and print the received string
+			cnt = 0;
+			//USART_puts(USART2, received_string);
+		}
 	}
-
+}
+	
 void TIM2_IRQHandler(void)
 {
 	if ( TIM2->SR & TIM_SR_UIF )
@@ -74,6 +85,7 @@ void TIM2_IRQHandler(void)
 		TIM2->SR &= ~TIM_SR_UIF;
 		GPIOD->ODR	|= GPIO_ODR_ODR_12;
 		Delay(30);
+		//USART_puts(USART1, "Sampling\r\n");
 		GPIOD->ODR &= ~GPIO_ODR_ODR_12;
 		Read_USART();
 		Read_ADC();
