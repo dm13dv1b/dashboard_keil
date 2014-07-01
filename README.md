@@ -22,3 +22,5 @@ LEDs PD12, PD13, PD14, PD15
 NMEA parsing in nmea.c
 
 EXTI1, EXTI2 added to PB1 PB2 without timer
+
+Added ITM_SendChar debug
