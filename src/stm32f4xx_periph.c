@@ -18,7 +18,7 @@ void TIM2_Init(void);
 void DMA1_Init(void);
 void DMA2_Init(void);
 void ADC_Init(void);
-void LED_Init(void);
+voi0d LED_Init(void);
 void USART1_Init(uint32_t baudrate);
 void USART_puts(USART_TypeDef* USARTx, volatile char *s);
 
