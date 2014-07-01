@@ -1,0 +1,9 @@
+.\stm32f4xx_periph.o: src\stm32f4xx_periph.c
+.\stm32f4xx_periph.o: .\inc\stm32f4xx.h
+.\stm32f4xx_periph.o: .\inc\Core\core_cm4.h
+.\stm32f4xx_periph.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+.\stm32f4xx_periph.o: .\inc\Core\core_cmInstr.h
+.\stm32f4xx_periph.o: .\inc\Core\core_cmFunc.h
+.\stm32f4xx_periph.o: .\inc\Core\core_cm4_simd.h
+.\stm32f4xx_periph.o: .\inc\system_stm32f4xx.h
+.\stm32f4xx_periph.o: .\inc\stm32f4xx_periph.h
