@@ -434,11 +434,6 @@
               <FileType>5</FileType>
               <FilePath>.\inc\Core\core_cmInstr.h</FilePath>
             </File>
-            <File>
-              <FileName>stm32f4xx_periph.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\inc\stm32f4xx_periph.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -483,26 +478,6 @@
               <FileName>misc_funct.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\misc_funct.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\stm32f4xx_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>misc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\misc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\stm32f4xx_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_init_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\stm32f4xx_init_rcc.c</FilePath>
             </File>
           </Files>
         </Group>
