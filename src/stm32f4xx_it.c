@@ -18,8 +18,9 @@ void EXTI1_IRQHandler(void)__irq;
 void EXTI2_IRQHandler(void)__irq;
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
+void delay_ms(uint32_t ms);
 
-extern uint8_t send_voltage, send_temperature;
+extern uint8_t send_voltage, send_temperature, send_gps;
 uint16_t temp;
 extern char usart_buffer[MAX_STRLEN];
 static __IO uint32_t TimingDelay;
@@ -95,6 +96,16 @@ void USART1_IRQHandler(void)
 	{
 		send_temperature = 0;
 	}
+
+	if ((USART1_string[0] == 'G') && (USART1_string[1] == 'S'))
+	{
+		send_gps = 1;
+	}
+
+	if ((USART1_string[0] == 'G') && (USART1_string[1] == 'R'))
+	{
+		send_gps = 0;
+	}	
 }
 	
 void TIM2_IRQHandler(void)

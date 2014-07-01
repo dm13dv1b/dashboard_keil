@@ -13,7 +13,7 @@
 #define ARRAYSIZE 128*4
 uint16_t adc_buffer[ARRAYSIZE];
 
-uint8_t send_voltage, send_temperature;
+uint8_t send_voltage, send_temperature, send_gps;
 
 float temperature;
 float voltage, temp_adc;
@@ -37,6 +37,10 @@ void Read_USART(void)
 	pch = strchr(p, '$');
 	i = pch-p+1;														//  megkeressük az elsö csillagot
 	pch = strchr(pch+1, '$');
+	if (send_gps == 1)
+	{
+		USART_puts(USART1, received_buff);
+	}
 	NMEA_Parse(received_buff, MAX_STRLEN);
 }
 

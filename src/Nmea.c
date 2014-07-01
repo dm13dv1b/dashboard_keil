@@ -1,5 +1,7 @@
 #include "stm32f4xx.h"
 #include "nmea.h"
+#include "stm32f4xx_it.h"
+#include "stm32f4xx_periph.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -76,7 +78,9 @@ void NMEA_Parse(char *buf, uint16_t len)
 		p = strstr(p, ",") + 1;
 		// alt
 		gpsdata.alt = NMEA_atoi(p);
-		GPIOD->ODR ^= GPIO_ODR_ODR_13;
+		GPIOD->ODR |= GPIO_ODR_ODR_13;
+		delay_ms(10);
+		GPIOD->ODR &= ~GPIO_ODR_ODR_13;
  }
 	
 	if(!strncmp(p, "$GPRMC", 6))
@@ -118,7 +122,9 @@ void NMEA_Parse(char *buf, uint16_t len)
 		gpsdata.day = (p[0] - '0') * 10 + p[1] - '0';
 		gpsdata.month = (p[2] - '0') * 10 + p[3] - '0';
 		gpsdata.year = (p[4] - '0') * 10 + p[5] - '0';
-		GPIOD->ODR ^= GPIO_ODR_ODR_14;
+		GPIOD->ODR |= GPIO_ODR_ODR_14;
+		delay_ms(10);
+		GPIOD->ODR &= ~GPIO_ODR_ODR_14;
  }
 		
 	if(!strncmp(p+3, "GSV", 3)) {	

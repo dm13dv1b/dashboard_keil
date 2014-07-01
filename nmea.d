@@ -13,5 +13,7 @@
 .\nmea.o: .\inc\stm32f4xx_usart.h
 .\nmea.o: .\inc\misc.h
 .\nmea.o: .\inc\nmea.h
+.\nmea.o: .\inc\stm32f4xx_it.h
+.\nmea.o: .\inc\stm32f4xx_periph.h
 .\nmea.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 .\nmea.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h

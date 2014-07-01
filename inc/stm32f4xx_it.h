@@ -13,4 +13,4 @@ void DMA2_Stream0_IRQHandler(void);
 void SysTick_Hadler(void);
 void Delay(__IO uint32_t nTime);
 void TimingDelay_Decrement(void);
-
+void delay_ms(uint32_t ms);
