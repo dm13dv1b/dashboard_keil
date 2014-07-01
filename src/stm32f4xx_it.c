@@ -59,7 +59,7 @@ void delay_ms(uint32_t ms)
 }
 
 void USART1_IRQHandler(void)
-	{
+{
 	
 	// check if the USART1 receive interrupt flag was set
 	if( USART_GetITStatus(USART1, USART_IT_RXNE) ){
@@ -103,7 +103,7 @@ void TIM2_IRQHandler(void)
 	{
 		TIM2->SR &= ~TIM_SR_UIF;
 		GPIOD->ODR	|= GPIO_ODR_ODR_12;
-		Delay(30);
+		Delay(10);
 		GPIOD->ODR &= ~GPIO_ODR_ODR_12;
 		Read_USART();
 		Read_ADC();
@@ -140,31 +140,31 @@ void DMA2_Stream0_IRQHandler(void)
 }
 
 void EXTI1_IRQHandler(void)__irq //Kezeli a PA1 lábra kapcsolt számlálást
-	{
-		TIM3	->	CR1				^=	(1<<0);							//Timer Disable
-		NVIC->ICER[0] 			&= ~(1<<7);							//Disable this interrupt during processing
+{
+		TIM3	->	CR1				^=	(1<<0);									//Timer Disable
+		NVIC->ICER[0] 			&= ~(1<<7);									//Disable this interrupt during processing
 			//Itt fogsz azt csinálni amit szeretnél
-		EXTI1_counter = TIM3->CNT;													//STM Studio debughoz
+		EXTI1_counter = TIM3->CNT;											//STM Studio debughoz
 		EXTI1_clock = ((SystemCoreClock/2)/TIM3->CNT);
 		TIM3	->	CNT = 0;
-		TIM3	->	SR				 =	0;													//Clear UIF bit
-		TIM3	->	CR1				|=	(1<<0);								//Timer Enable
-		EXTI->PR 	|=(1<<1);													//Pending request clear
-		NVIC->ICPR[0] 			|= (1<<7);								//Clear the Pending Interrupt
-		NVIC->ISER[0] |= (1 << 7) | (1 << 8);										//Reenable the EXTI1 Interrupt
-	}
+		TIM3	->	SR				 =	0;											//Clear UIF bit
+		TIM3	->	CR1				|=	(1<<0);									//Timer Enable
+		EXTI->PR 	|=(1<<1);															//Pending request clear
+		NVIC->ICPR[0] 			|= (1<<7);									//Clear the Pending Interrupt
+		NVIC->ISER[0] |= (1 << 7) | (1 << 8);						//Reenable the EXTI1 Interrupt
+}
 
 void EXTI2_IRQHandler(void)__irq //Kezeli a PA2 lábra kapcsolt számlálást
-	{
-		TIM4	->	CR1				^=	(1<<0);							//Timer Disable
-		NVIC->ICER[0] 			&= ~(1<<8);							//Disable this interrupt during processing
+{
+		TIM4	->	CR1				^=	(1<<0);									//Timer Disable
+		NVIC->ICER[0] 			&= ~(1<<8);									//Disable this interrupt during processing
 			//Itt fogsz azt csinálni amit szeretnél
-		EXTI2_counter = TIM4->CNT;													//STM Studio debughoz
+		EXTI2_counter = TIM4->CNT;											//STM Studio debughoz
 		EXTI2_clock = ((SystemCoreClock/2)/TIM4->CNT);
 		TIM4	->	CNT = 0;
-		TIM4	->	SR		=	0;													//Clear UIF bit
-		TIM4	->	CR1				|=	(1<<0);								//Timer Enable
-		EXTI->PR 	|= (1<<3);													//Pending request clear
-		NVIC->ICPR[0] 			|= (1<<8);								//Clear the Pending Interrupt
-		NVIC->ISER[0] |= (1 << 8) | (1 << 7);										//Reenable the EXTI2 Interrupt
-	}
+		TIM4	->	SR		=	0;														//Clear UIF bit
+		TIM4	->	CR1				|=	(1<<0);									//Timer Enable
+		EXTI->PR 	|= (1<<3);														//Pending request clear
+		NVIC->ICPR[0] 			|= (1<<8);									//Clear the Pending Interrupt
+		NVIC->ISER[0] |= (1 << 8) | (1 << 7);						//Reenable the EXTI2 Interrupt
+}
